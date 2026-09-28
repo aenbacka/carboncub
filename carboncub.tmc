@@ -1,0 +1,36 @@
+﻿<[file][][]
+    <[object][][]
+        <[int][Version][220]>
+		<[vec32array][ContactSpheres][ ( 0.3438 0.950 -1.129 0.33 ) ( 0.3438 -0.950 -1.129 0.33 ) ( -4.9099 0.0000 -0.2460 0.12 ) ]>
+        <[string8][ICAO][PA11]>
+        <[string8][DisplayName][Carbon Cub FX-2]>
+        <[string8][DisplayNameFull][CubCrafters Carbon Cub FX-2]>
+        <[localized_text_list][Descriptions][]
+          <[localized_text][][]
+            <[string8][Language][en]>
+            <[string8][Text][The Carbon Cub FX-2 is an American amateur-built aircraft, designed and produced by Cub Crafters of Yakima, Washington. The aircraft is supplied as a kit for amateur construction.]>
+          >
+        >
+        <[float64][MaximumTakeoffMass][846.0]>
+        <[float64][WingSpan]          [10.9]>
+        <[uint]   [Year]              [2018]>
+        <[uint]   [UnitsBuilt]        [5]>
+        <[uint]   [EngineCount]       [1]>
+        <[float64][EnginePower]       [132390.0]>
+        <[float64][MinimumAirspeed]   [16.1]>
+        <[float64][ApproachAirspeed]  [24.58]>
+        <[float64][CruiseAirspeed]    [48.72]>
+        <[float64][CruiseAltitude]    [1826.0]>
+        <[float64][CruiseSpeed]       [48.72]>
+        <[float64][MaximumAirspeed]   [76.0]>
+        <[float64][MaximumAltitude]   [4300.0]>
+        <[float64][MaximumSpeed]      [76.0]>
+        <[float64][MaximumRange]      [1017110.0]>
+        <[tmvector2d][FlapAirspeedRange]   [ 16.1 35.7 ]>
+        <[tmvector2d][NormalAirspeedRange] [ 26.8 39.0 ]>
+        <[tmvector2d][CautionAirspeedRange][ 39.0 76.0 ]>
+        <[tmvector2d][FlapSettings][ (0.0 0.0) (0.333 0.289) (0.667 0.581) (1.0 0.8726) ]>
+        <[string8][Tags][ airplane general_aviation piston flaps gear ]>
+        <[string8][Pilot][pilot_jason]>
+    >
+>
