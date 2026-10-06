@@ -244,8 +244,8 @@
                 <[float64][Inflation][80000.0]>
                 <[float64][K][88900.0]>
                 <[float64][D][762.0]>
-                <[string8][InputBrake][LeftBrakeInput.Output]>
-                <[float64][BrakeStrength][0.15]>
+                <[string8][InputBrake][LeftBrakePedal.Output]>
+                <[float64][BrakeStrength][0.08]>
             >
             <[output][GroundRollSpeedLeft][]
                 <[string8][Input][LeftWheelHull.Speed]>
@@ -281,8 +281,8 @@
                 <[float64][Inflation][80000.0]>
                 <[float64][K][88900.0]>
                 <[float64][D][762.0]>
-                <[string8][InputBrake][RightBrakeInput.Output]>
-                <[float64][BrakeStrength][0.15]>
+                <[string8][InputBrake][RightBrakePedal.Output]>
+                <[float64][BrakeStrength][0.08]>
             >
             <[output][GroundRollSpeedRight][]
                 <[string8][Input][RightWheelHull.Speed]>
@@ -987,13 +987,13 @@
             >
             <[servoclassic][LeftBrakePedal][]
                 <[string8][Input][LeftBrakeInput.Output]>
-                <[float64][Speed][3.0]>
+                <[float64][Speed][1.5]>
                 <[float64][P1][1.0]>
                 <[float64][Position][0.0]>
             >
             <[servoclassic][RightBrakePedal][]
                 <[string8][Input][RightBrakeInput.Output]>
-                <[float64][Speed][3.0]>
+                <[float64][Speed][1.5]>
                 <[float64][P1][1.0]>
                 <[float64][Position][0.0]>
             >
