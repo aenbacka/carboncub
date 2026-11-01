@@ -43,6 +43,48 @@
                 <[float64][Length][0.02]>
             >
 
+            // GPS tablet touch areas (invisible, on the screen corners):
+            // upper right = on/off, lower left = zoom out, lower right = zoom in
+            <[control_cylinder][GPSOnOff][]
+                <[string8][Type][ button ]>
+                <[vector3_float64][R0][ 0.5606 -0.070 0.1178 ]>
+                <[matrix3_float64][B0][ 0.9659 0.0 -0.2588  0.0 1.0 0.0  0.2588 0.0 0.9659 ]>
+                <[vector3_float64][Direction][ 0.9659 0.0 -0.2588 ]>
+                <[control_message][OnPush][]
+                    <[string8][Message][GPS.OnOff]>
+                    <[string8][Qualifiers][ toggle ]>
+                    <[float64][Value][1.0]>
+                >
+                <[float64][Radius][0.012]>
+                <[float64][Length][0.005]>
+            >
+            <[control_cylinder][GPSZoomOut][]
+                <[string8][Type][ button ]>
+                <[vector3_float64][R0][ 0.5407 0.070 0.0434 ]>
+                <[matrix3_float64][B0][ 0.9659 0.0 -0.2588  0.0 1.0 0.0  0.2588 0.0 0.9659 ]>
+                <[vector3_float64][Direction][ 0.9659 0.0 -0.2588 ]>
+                <[control_message][OnPush][]
+                    <[string8][Message][GPS.Zoom]>
+                    <[string8][Qualifiers][ step ]>
+                    <[float64][Value][1.0]>
+                >
+                <[float64][Radius][0.012]>
+                <[float64][Length][0.005]>
+            >
+            <[control_cylinder][GPSZoomIn][]
+                <[string8][Type][ button ]>
+                <[vector3_float64][R0][ 0.5407 -0.070 0.0434 ]>
+                <[matrix3_float64][B0][ 0.9659 0.0 -0.2588  0.0 1.0 0.0  0.2588 0.0 0.9659 ]>
+                <[vector3_float64][Direction][ 0.9659 0.0 -0.2588 ]>
+                <[control_message][OnPush][]
+                    <[string8][Message][GPS.Zoom]>
+                    <[string8][Qualifiers][ step ]>
+                    <[float64][Value][-1.0]>
+                >
+                <[float64][Radius][0.012]>
+                <[float64][Length][0.005]>
+            >
+
             // left console
             <[control_cylinder][Radio][16]
                 <[string8][Type][knob]>

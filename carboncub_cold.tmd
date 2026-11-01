@@ -7,6 +7,11 @@
                 <[float64][Value][0.0]>
             >
 
+            // gps off
+            <[input_binary][GPSSelectedOn][]
+                <[float64][Value][0.0]>
+            >
+
         >
     >
 >

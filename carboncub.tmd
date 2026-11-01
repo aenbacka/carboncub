@@ -1579,6 +1579,9 @@
             <[heading_indicator][HeadingIndicator][]
                 <[string8][Body][Fuselage]>
             >
+            <[output][HeadingAngle][]
+                <[string8][Input][HeadingIndicator.MagneticHeading]>
+            >
             <[sender][SenderMagneticHeading][]
                 <[string8][Input][HeadingIndicator.MagneticHeading]>
                 <[string8][Message][Aircraft.MagneticHeading]>
@@ -1676,6 +1679,63 @@
 
             // external lights end
 
+
+            // GPS (moving map on the panel tablet, taken from the DR400)
+            <[satellite_navigation_system][GPS][]
+                <[string8][Body][Fuselage]>
+                <[string8][InputEnable][GPSOn.Output]>
+            >
+            <[output_vec3][GPSPosition][]
+                <[string8][Input][GPS.OutputPosition]>
+            >
+            <[output][GPSGroundSpeed][]
+                <[string8][Input][GPS.OutputGroundSpeed]>
+            >
+            <[output][GPSMagneticTrack][]
+                <[string8][Input][GPS.OutputMagneticTrack]>
+            >
+
+            <[input_button][GPSOnOFF][]
+                <[string8][Message][GPS.OnOff]>
+                <[string8][Events]       [ ButtonSoundIn.Trigger  ]>
+                <[string8][EventsRelease][ ButtonSoundOut.Trigger ]>
+            >
+            <[input_binary][GPSSelectedOn][]
+                <[string8][Message][GPS.OnOff]>
+                <[float64][Value][1.0]>
+            >
+            <[electrical_load][GPSOn][]
+                <[string8][InputEnable][GPSSelectedOn.Output]>
+                <[string8][InputVoltage][MainBus.Output]>
+                <[string8][AddLoad]     [MainBus.AddLoad]>
+                <[float64][MinimumVoltage][9.0]>
+                <[float64][RatedCurrent][0.3]>
+            >
+            <[output_free][GPSOnOutput][]
+                <[string8][Input][GPSOn.Output]>
+            >
+
+            <[input_button][GPSZoomIn][]
+                <[string8][Message][GPS.Zoom]>
+                <[string8][Events]       [ ButtonSoundIn.Trigger  ]>
+                <[string8][EventsRelease][ ButtonSoundOut.Trigger ]>
+                <[float64][InputValue][-1.0]>
+            >
+            <[input_button][GPSZoomOut][]
+                <[string8][Message][GPS.Zoom]>
+                <[string8][Events]       [ ButtonSoundIn.Trigger  ]>
+                <[string8][EventsRelease][ ButtonSoundOut.Trigger ]>
+                <[float64][InputValue][1.0]>
+            >
+            <[input_discrete][GPSZoom][]
+                <[string8][Message][GPS.Zoom]>
+                <[string8][InputEnable][GPSOn.Output]>
+                <[tmvector2d][Range][ -4.0 5.0 ]>
+                <[float64][Value][-3.0]>
+            >
+            <[output_free][GPSZoomOutput][]
+                <[string8][Input][GPSZoom.Output]>
+            >
 
             // button and switch sounds
             <[event_sound][ButtonSoundIn][]
@@ -4174,6 +4234,88 @@
                         <[tmvector3d][Z0][ -0.2478 -0.9688 -0.0005 ]>
                     >
                 >
+            >
+
+            // GPS moving map on the panel tablet (taken from the DR400)
+            <[graphics_input_color][InstrumentLightingGPS][]
+                <[uint32][InputID][GPSOn.Output]>
+                <[tmvector3d][Color][ 500.0 500.0 500.0 ]>
+            >
+            <[rigidbodygraphics][FuselageGPSDisplay][]
+                <[uint32][PositionID][Fuselage.R]>
+                <[uint32][OrientationID][Fuselage.Q]>
+                <[string8][GeometryList][ TabletDisplayScreen ]>
+                <[string8][InputLuminance][InstrumentLightingGPS.Output]>
+            >
+            <[graphics_input][GPSZoom][]
+                <[uint32][InputID][GPSZoom.Output]>
+            >
+            <[graphics_mapping_linear][GPSZoomMap][]
+                <[string8][Input][GPSZoom.Output]>
+                <[float64][Scaling][1.0]>
+                <[float64][Offset][5.0]>
+            >
+            <[graphics_mapping_linear][GPSZoomAid][]
+                <[string8][Input][GPSZoom.Output]>
+                <[float64][Scaling][-1.0]>
+            >
+            <[texture_animation][DisplayTexture][]
+                <[string8][TextureName][tablet_gps_light]>
+                <[tmvector4d][ClearColor][ 0.03 0.03 0.03 1.0 ]>
+                <[tmvector2d][TargetSize][ 1024 1024 ]>
+                <[string8][RenderList][ DisplayMovingMap ]>
+            >
+            // TabletDisplayScreen UVs in carboncub.tgi are mapped onto this 600 x 392 rectangle.
+            // It is vertically centred (316 = (1024 - 392) / 2) so it does not matter from which
+            // edge the Y position is counted.
+            <[graphics_animation_display][DisplayMovingMap][]
+                <[uint32][PositionID][Fuselage.R]>
+                <[uint32][OrientationID][Fuselage.Q]>
+                <[tmvector3d][R0][ 0.5536 0.0 0.0798 ]>
+                <[float64][Radius][0.1]>
+                <[tmvector2d][TargetPosition][    9  316 ]>
+                <[tmvector2d][TargetSize]    [  600  392 ]>
+                <[tmvector2d][TargetScale]   [ 1024 1024 ]>
+                <[string8][InputDisplay][0]>
+                <[string8][RenderList][ RenderMovingMapWithOverlay ]>
+            >
+            <[graphics_animation_render_list][RenderMovingMapWithOverlay][]
+                <[string8][RenderList][ MovingMap NavaidOverlay ]>
+            >
+            <[texture_animation_map_display][MovingMap][]
+                <[uint32][PositionID][Fuselage.R]>
+                <[uint32][OrientationID][Fuselage.Q]>
+                <[tmvector2d][TargetPosition][    0    0 ]>
+                <[tmvector2d][TargetSize]    [  600  392 ]>
+                <[tmvector2d][TargetScale]   [ 1024 1024 ]>
+                <[string8][InputZoom]        [GPSZoomMap.Output]>
+                <[tmvector3d][Color]         [ 0.7 0.7 0.7 ]>
+            >
+            <[graphics_input_vec3][GPSPosition][]
+                <[uint32][InputID][GPSPosition.Output]>
+            >
+            <[graphics_input][GPSMagneticTrack][]
+                <[uint32][InputID][GPSMagneticTrack.Output]>
+            >
+            <[graphics_input][HeadingAngle][]
+                <[uint32][InputID][HeadingAngle.Output]>
+            >
+            <[display_navigation_overlay][NavaidOverlay][]
+                <[tmvector2d][TargetPosition][    0    0 ]>
+                <[tmvector2d][TargetSize]    [ 1024 1024 ]>
+                <[tmvector2d][TargetScale]   [ 1024 1024 ]>
+                <[float64][FontSize]         [ 40 ]>
+                <[tmvector4f][ColorAircraft]     [ 0.373 0.992 0.000 1.0 ]>
+                <[tmvector4f][ColorVOR]          [ 0.200 1.000 1.000 1.0 ]>
+                <[tmvector4f][ColorNDB]          [ 1.000 0.500 0.500 1.0 ]>
+                <[tmvector4f][ColorAirport]      [ 1.000 1.000 1.000 1.0 ]>
+                <[tmvector4f][ColorRoute]        [ 0.373 0.992 0.000 1.0 ]>
+                <[tmvector4f][ColorWaypoint]     [ 1.000 1.000 1.000 1.0 ]>
+                <[tmvector4f][ColorNextWaypoint] [ 1.000 0.314 0.141 1.0 ]>
+                <[tmvector4f][ColorRouteWaypoint][ 0.373 0.992 0.000 1.0 ]>
+                <[string8][InputPosition][GPSPosition.Output]>
+                <[string8][InputHeading] [HeadingAngle.Output]>
+                <[string8][InputZoom]    [GPSZoomAid.Output]>
             >
         >
         <[pointer_list_tmsound][SoundObjects][]
